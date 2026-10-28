@@ -1,0 +1,92 @@
+/**
+ * ABBF design tokens — "the jersey": orange body, cyan sleeves, navy ink.
+ * Contrast pairs checked against WCAG 2.1 AA (noted inline).
+ */
+:root {
+  /* Brand (from abbf.in) */
+  --color-accent-orange: #f48120; /* fills; ink text on it 5.7:1 */
+  --color-accent-cyan: #1bb1d0; /* fills; ink text on it 5.9:1 */
+  --color-accent-orange-deep: #b8500b; /* white text on it 5.0:1 */
+  --color-accent-cyan-deep: #0a6d80; /* white text on it 6.0:1 */
+  --color-accent-orange-text: #9a4a00; /* on chalk 5.8:1 */
+  --color-accent-cyan-text: #0a6d80; /* on chalk 5.6:1 */
+
+  /* Neutrals */
+  --color-ink: #0e2a33; /* on white 14:1 */
+  --color-ink-2: #15384a;
+  --color-chalk: #f2f6f7;
+  --color-white: #ffffff;
+  --color-muted: #4d636b; /* on chalk 5.8:1 */
+  --color-muted-on-ink: #a9c2c9; /* on ink 8.0:1 */
+  --color-line: rgba(14, 42, 51, 0.12);
+  --color-line-on-ink: rgba(255, 255, 255, 0.16);
+
+  /* Legacy aliases used by inner pages */
+  --color-text: var(--color-ink);
+  --color-bg: var(--color-white);
+  --color-error: #b3261e;
+  --color-focus-ring: var(--color-accent-cyan-deep);
+
+  /* Type */
+  --font-display: "Bricolage Grotesque", "Arial Narrow", sans-serif;
+  --font-body: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, sans-serif;
+  --font-heading: var(--font-display);
+  --font-size-base: 1.1875rem; /* 19px — generous for low-vision readers */
+  --line-height-base: 1.6;
+
+  /* Scale (perfect fourth-ish, fluid) */
+  --step-0: 1.1875rem;
+  --step-1: clamp(1.35rem, 1.2rem + 0.6vw, 1.6rem);
+  --step-2: clamp(1.75rem, 1.4rem + 1.4vw, 2.4rem);
+  --step-3: clamp(2.4rem, 1.7rem + 3vw, 4rem);
+  --step-4: clamp(2.75rem, 1.4rem + 4.6vw, 5.75rem);
+
+  /* Layout */
+  --inner-max: 84rem;
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --section-pad: clamp(5rem, 10vw, 9rem);
+
+  /* Motion */
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-duration: 0.5s;
+  --motion-ease: var(--ease-spring);
+}
+
+/* High-contrast mode (toolbar toggle) */
+html[data-a11y-contrast="high"] {
+  --color-ink: #000000;
+  --color-ink-2: #000000;
+  --color-chalk: #ffffff;
+  --color-muted: #000000;
+  --color-muted-on-ink: #ffffff;
+  --color-accent-orange-text: #000000;
+  --color-accent-cyan-text: #003d47;
+  --color-accent-orange-deep: #8a3a00;
+  --color-accent-cyan-deep: #00434f;
+  --color-line: #000000;
+  --color-line-on-ink: #ffffff;
+  --color-focus-ring: #000000;
+}
+
+/* Font-size steps (toolbar) */
+html[data-font-size="sm"] { font-size: 87.5%; }
+html[data-font-size="lg"] { font-size: 112.5%; }
+html[data-font-size="xl"] { font-size: 125%; }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --motion-duration: 0.01ms; }
+}
+
+html[data-a11y-reduce-motion="true"] {
+  --motion-duration: 0.01ms;
+}
+
+html[data-a11y-reduce-motion="true"] *,
+html[data-a11y-reduce-motion="true"] *::before,
+html[data-a11y-reduce-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
