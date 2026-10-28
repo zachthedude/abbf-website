@@ -3,6 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      /* Set the theme before first paint: saved choice, else the OS setting */
+      try {
+        document.documentElement.setAttribute("data-theme", localStorage.getItem("abbf-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+      } catch (e) {}
+    </script>
     <title>Become an Ally - Adventures Beyond Barriers Foundation</title>
     <meta name="description" content="Partner with ABBF as a corporate ally and build an inclusive culture through sport." />
     <meta name="theme-color" content="#0e2a33" />

@@ -504,7 +504,58 @@
     select(root.querySelector('[aria-selected="true"]') || tabs[0], false);
   }
 
+  /* --- Light/dark theme. The inline <head> script sets data-theme before paint;
+     this only wires the button and remembers an explicit choice. --- */
+  function initThemeToggle() {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+    var html = document.documentElement;
+    var meta = document.querySelector('meta[name="theme-color"]');
+
+    function sync() {
+      var dark = html.getAttribute("data-theme") === "dark";
+      btn.setAttribute("aria-pressed", dark ? "true" : "false");
+      btn.title = dark ? "Switch to light mode" : "Switch to dark mode";
+      if (meta) meta.setAttribute("content", dark ? "#061317" : "#0e2a33");
+    }
+
+    btn.addEventListener("click", function () {
+      var next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      html.setAttribute("data-theme", next);
+      try {
+        localStorage.setItem("abbf-theme", next);
+      } catch (e) {
+        /* ignore */
+      }
+      sync();
+    });
+
+    sync();
+    requestAnimationFrame(function () {
+      html.classList.add("theme-ready");
+    });
+  }
+
+  /* --- Scroll reveal: content is visible without JS; only animate when motion is allowed --- */
+  function initReveal() {
+    var els = document.querySelectorAll("[data-reveal]");
+    if (!els.length || prefersReducedMotion() || !("IntersectionObserver" in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        e.target.classList.add("is-revealed");
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+    els.forEach(function (el) {
+      el.classList.add("reveal-pending");
+      io.observe(el);
+    });
+  }
+
   function initAll() {
+    initThemeToggle();
+    initReveal();
     initMobileNav();
     initA11yToolbar();
     document.querySelectorAll("[data-carousel]").forEach(initCarousel);

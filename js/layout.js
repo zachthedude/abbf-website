@@ -90,6 +90,11 @@
       navLinks(currentPath) +
       "</nav>" +
       '<a href="https://give.abbf.in" class="btn btn-primary btn-sm site-header__donate" target="_blank" rel="noopener noreferrer">Donate' + NEW_TAB + "</a>" +
+      '<button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">' +
+      '<svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>' +
+      '<svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>' +
+      '<span class="visually-hidden">Dark mode</span>' +
+      "</button>" +
       '<button type="button" class="site-header__menu-btn" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation menu">' +
       '<span class="burger" aria-hidden="true"><span></span><span></span></span>' +
       "</button>" +

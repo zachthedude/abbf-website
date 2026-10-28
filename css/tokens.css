@@ -27,6 +27,15 @@
   --color-error: #b3261e;
   --color-focus-ring: var(--color-accent-cyan-deep);
 
+  /* Theme-aware roles. In light mode they alias the brand values above. */
+  --color-ink-bg: var(--color-ink); /* dark bands: footer, .section--ink */
+  --color-ink-bg-2: var(--color-ink-2);
+  --color-on-accent: #0e2a33; /* text on orange/cyan/white fills, never flips */
+  --color-fill-strong: var(--color-ink); /* selected/hover chips */
+  --color-on-fill-strong: #ffffff;
+  --color-header-bg: rgba(255, 255, 255, 0.92);
+  --color-impact-lead: var(--color-accent-orange-deep);
+
   /* Type */
   --font-display: "Bricolage Grotesque", "Arial Narrow", sans-serif;
   --font-body: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, sans-serif;
@@ -53,8 +62,39 @@
   --motion-ease: var(--ease-spring);
 }
 
-/* High-contrast mode (toolbar toggle) */
+/* Dark mode (header toggle; defaults to the OS setting, see the inline script in each <head>).
+   Pairs checked against --color-white #0b1e24: ink 15.6:1, muted 9.0:1, orange text 8.1:1, cyan text 9.3:1. */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --color-white: #0b1e24;
+  --color-chalk: #112a32;
+  --color-paper-2: #17343d;
+  --color-ink: #e9f1f3;
+  --color-muted: #a9c2c9;
+  --color-line: rgba(255, 255, 255, 0.14);
+  --color-accent-orange-text: #ff9f52;
+  --color-accent-cyan-text: #6ad3e8;
+  --color-focus-ring: #6ad3e8;
+  --color-ink-bg: #061317;
+  --color-ink-bg-2: #112a32;
+  --color-fill-strong: #e9f1f3;
+  --color-on-fill-strong: #0e2a33;
+  --color-header-bg: rgba(11, 30, 36, 0.88);
+  --color-impact-lead: var(--color-accent-orange);
+}
+
+/* High-contrast mode (toolbar toggle) — always light, overrides dark mode */
 html[data-a11y-contrast="high"] {
+  color-scheme: light;
+  --color-white: #ffffff;
+  --color-paper-2: #ffffff;
+  --color-ink-bg: #000000;
+  --color-ink-bg-2: #000000;
+  --color-fill-strong: #000000;
+  --color-on-fill-strong: #ffffff;
+  --color-on-accent: #000000;
+  --color-header-bg: #ffffff;
+  --color-impact-lead: #8a3a00;
   --color-ink: #000000;
   --color-ink-2: #000000;
   --color-chalk: #ffffff;

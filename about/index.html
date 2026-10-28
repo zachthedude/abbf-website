@@ -3,8 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      /* Set the theme before first paint: saved choice, else the OS setting */
+      try {
+        document.documentElement.setAttribute("data-theme", localStorage.getItem("abbf-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+      } catch (e) {}
+    </script>
     <title>Who We Are - Adventures Beyond Barriers Foundation</title>
-    <meta name="description" content="Meet the founder, team, board and partners of Adventures Beyond Barriers Foundation." />
+    <meta name="description" content="The vision, mission and story of Adventures Beyond Barriers Foundation, and the founder, team, board and partners behind it." />
     <meta name="theme-color" content="#0e2a33" />
     <link rel="icon" href="https://abbf.in/favicon-32x32.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,21 +33,81 @@
         <div class="inner">
           <h1 id="page-title" class="page-hero__title">you can learn more about a person in an hour of play than in a year of conversation.</h1>
           <p class="page-hero__lead">ABBF's sole reason to be is to build an inclusive world for persons with and without disability.</p>
+          <nav class="chapters" aria-label="On this page">
+            <a href="#vision">vision and mission</a>
+            <a href="#story">our story</a>
+            <a href="#team">the team</a>
+            <a href="#board">board and advisors</a>
+            <a href="#allies">partners</a>
+            <a href="#compliance">compliance</a>
+          </nav>
           <img class="page-hero__img" src="https://storage.googleapis.com/abbf/images/about/banner-about-01.webp" alt="Two riders in blue jackets lift a tandem bicycle over their heads beside a sign reading Highest Motorable Road in the World." width="1600" height="686" />
         </div>
       </section>
 
-      <section class="section " aria-labelledby="vision-heading">
+      <section class="section creed-section" id="vision" aria-labelledby="vision-heading">
         <div class="inner">
           <div class="split split--tight">
             <h2 id="vision-heading" class="section-heading split__head">our vision and mission</h2>
-            <div class="split__body prose"><p class="lead">By organising outdoor sports activities, we encourage dialogue and build empathy between persons with and without disability.</p><p>For all participants, these interactions result in enhanced life skills, increased self confidence, better social skills, and a heightened awareness of the need for an equitable world.</p></div>
+            <div class="split__body prose"><p class="lead">Four ideas hold ABBF together. Pick one to read it in full.</p></div>
           </div>
 
+          <div class="creed" data-tabs>
+            <div class="creed__tabs" role="tablist" aria-label="Our vision and mission" aria-orientation="vertical">
+              <button type="button" role="tab" id="creed-tab-purpose" aria-controls="creed-purpose" aria-selected="true">why we exist</button>
+              <button type="button" role="tab" id="creed-tab-vision" aria-controls="creed-vision" aria-selected="false">our vision</button>
+              <button type="button" role="tab" id="creed-tab-mission" aria-controls="creed-mission" aria-selected="false">our mission</button>
+              <button type="button" role="tab" id="creed-tab-change" aria-controls="creed-change" aria-selected="false">what it changes</button>
+            </div>
+
+            <div class="creed__panel" role="tabpanel" id="creed-purpose" aria-labelledby="creed-tab-purpose" tabindex="0">
+              <p class="creed__statement">to build an inclusive world for persons with and without disability.</p>
+              <p class="creed__support">That is ABBF's sole reason to be. Everything we run is aimed at eradicating the stigma that still surrounds disability today.</p>
+            </div>
+
+            <div class="creed__panel" role="tabpanel" id="creed-vision" aria-labelledby="creed-tab-vision" tabindex="0">
+              <p class="creed__statement">a world where no one is left behind.</p>
+              <blockquote class="creed__quote">
+                <p>&ldquo;A world where people with and without disabilities come together as equals and truly belong.&rdquo;</p>
+                <footer>Divyanshu Ganatra, founder, in the <a href="https://abbf.in/annual-report-25-26/index.html" target="_blank" rel="noopener noreferrer">2025-26 Annual Impact Report<span class="visually-hidden"> (opens in a new tab)</span></a></footer>
+              </blockquote>
+            </div>
+
+            <div class="creed__panel" role="tabpanel" id="creed-mission" aria-labelledby="creed-tab-mission" tabindex="0">
+              <p class="creed__statement">to promote empathy and inclusivity for all, through outdoor sport.</p>
+              <p class="creed__support">By organising outdoor sports activities, we encourage dialogue and build empathy between persons with and without disability. Treks, tandem cycling, marathons, SCUBA diving and paragliding put everyone on the same trail, as equals.</p>
+            </div>
+
+            <div class="creed__panel" role="tabpanel" id="creed-change" aria-labelledby="creed-tab-change" tabindex="0">
+              <p class="creed__support creed__support--first">For every participant, with or without disability, these interactions result in:</p>
+              <ul class="outcomes" role="list">
+                <li>enhanced life skills</li>
+                <li>increased self-confidence</li>
+                <li>better social skills</li>
+                <li>a heightened awareness of the need for an equitable world</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="section section--chalk" aria-labelledby="founder-heading">
+      <section class="section section--ink" aria-labelledby="journey-heading">
+        <div class="inner">
+          <div class="split split--tight">
+            <h2 id="journey-heading" class="section-heading split__head">from one man's lost sight to a movement.</h2>
+            <div class="split__body prose"><p>ABBF grew out of a single refusal to accept limits. Here is how that refusal became a foundation.</p></div>
+          </div>
+          <ol class="journey" role="list">
+            <li data-reveal><p class="journey__when">at nineteen</p><h3 class="journey__what">Divyanshu loses his sight</h3><p>Glaucoma takes his eyesight. He goes on to become a clinical psychologist, and India's first blind pilot.</p></li>
+            <li data-reveal><p class="journey__when">13 October 2014</p><h3 class="journey__what">ABBF is born</h3><p>Adventures Beyond Barriers Foundation is registered as a Section 8 not-for-profit company.</p></li>
+            <li data-reveal><p class="journey__when">the firsts</p><h3 class="journey__what">adventure, made accessible</h3><p>Manali to Khardung La on tandem cycles. India's first open water SCUBA diving and paramotoring events for PwDs. Inclusive climbs to Kilimanjaro.</p></li>
+            <li data-reveal><p class="journey__when">2025-26</p><h3 class="journey__what">one year of moving together</h3><p>42 inclusive experiences across 5 states, with 3,813 persons with disabilities and 6,826 allies: 58,072 hours of people moving together.</p></li>
+          </ol>
+          <p class="journey__source">2025-26 figures from the <a href="https://abbf.in/annual-report-25-26/index.html" target="_blank" rel="noopener noreferrer">ABBF Annual Impact Report 2025-26<span class="visually-hidden"> (opens in a new tab)</span></a>.</p>
+        </div>
+      </section>
+
+      <section class="section section--chalk" id="story" aria-labelledby="founder-heading">
         <div class="inner founder">
           <img class="founder__photo" src="https://storage.googleapis.com/abbf/images/team/divyanshu-g.jpg" alt="Portrait of Divyanshu Ganatra, founder of ABBF" width="600" height="750" loading="lazy" />
           <div class="prose">
@@ -50,6 +116,15 @@
             <p>Why? Because he simply could not reconcile with what the world was trying to tell him: that the rest of his life would be spent making cane furniture and chalk pieces. That need to do more, be more, say more led to the birth of Adventures Beyond Barriers Foundation. An organisation aimed at eradicating the stigma that surrounds disability even today.</p>
             <p>In effect, Divyanshu lost his sight, but gained a vision: to promote empathy and inclusivity for all; to create a world where no one is left behind. And that is the very heart of ABBF.</p>
           </div>
+        </div>
+      </section>
+
+      <section class="quote-block quote-block--solo" aria-label="A note from our founder">
+        <div class="inner">
+          <figure class="quote-block__figure">
+            <blockquote class="quote-block__text"><p>&ldquo;While we cannot control the wind, we can certainly adjust our sails.&rdquo;</p></blockquote>
+            <figcaption class="quote-block__cite">Divyanshu Ganatra, founder and chairman</figcaption>
+          </figure>
         </div>
       </section>
 
@@ -69,7 +144,7 @@
         </div>
       </section>
 
-      <section class="section section--chalk" aria-labelledby="board-heading">
+      <section class="section section--chalk" id="board" aria-labelledby="board-heading">
         <div class="inner">
           <div class="split split--tight">
             <h2 id="board-heading" class="section-heading split__head">our governing board, evangelists and advisors.</h2>
@@ -150,7 +225,7 @@
         </div>
       </section>
 
-      <section class="section section--chalk" aria-labelledby="compliance-heading">
+      <section class="section section--chalk" id="compliance" aria-labelledby="compliance-heading">
         <div class="inner">
           <div class="split split--tight">
             <h2 id="compliance-heading" class="section-heading split__head">the fine print, and the compliance. all in order.</h2>
