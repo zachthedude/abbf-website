@@ -46,24 +46,89 @@
     );
   }
 
+  /* Universal-access figure, drawn to match the header icons' 2px stroke */
+  var A11Y_ICON =
+    '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<circle cx="12" cy="4.5" r="1.8" fill="currentColor" stroke="none"/><path d="M4.5 8.5c2.4.8 4.9 1.2 7.5 1.2s5.1-.4 7.5-1.2M12 9.7v4.6M12 14.3l-3 6.2M12 14.3l3 6.2"/></svg>';
+
+  function toggleBtn(id, label, hint) {
+    return (
+      '<button type="button" class="a11y-switch" id="' + id + '" aria-pressed="false">' +
+      '<span class="a11y-switch__text"><span class="a11y-switch__label">' + label + "</span>" +
+      '<span class="a11y-switch__hint">' + hint + "</span></span>" +
+      '<span class="a11y-switch__track" aria-hidden="true"></span>' +
+      "</button>"
+    );
+  }
+
   function renderA11yToolbar() {
     return (
       '<aside class="a11y-toolbar" aria-label="Accessibility settings">' +
-      '<button type="button" class="a11y-toolbar__toggle" aria-expanded="false" aria-controls="a11y-panel" id="a11y-toggle">' +
-      '<span aria-hidden="true">A</span><span class="visually-hidden">Accessibility settings</span>' +
+      '<button type="button" class="a11y-toolbar__toggle" aria-expanded="false" aria-controls="a11y-panel" id="a11y-toggle" title="Accessibility and read aloud">' +
+      A11Y_ICON + '<span class="visually-hidden">Accessibility and read aloud</span>' +
       "</button>" +
-      '<div class="a11y-toolbar__panel" id="a11y-panel" hidden>' +
-      '<p class="a11y-toolbar__title" id="a11y-panel-title">Accessibility</p>' +
+      '<div class="a11y-toolbar__panel" id="a11y-panel" role="region" aria-labelledby="a11y-panel-title" hidden>' +
+      '<div class="a11y-toolbar__head">' +
+      '<h2 class="a11y-toolbar__title" id="a11y-panel-title">Make this site work for you</h2>' +
+      '<button type="button" class="a11y-toolbar__close" id="a11y-close" aria-label="Close accessibility settings">' +
+      '<span class="burger burger--x burger--static" aria-hidden="true"><span></span><span></span></span></button>' +
+      "</div>" +
+      '<p class="a11y-toolbar__note">Settings are saved on this device. Already use a screen reader? Every page is built to work with NVDA, JAWS, VoiceOver and TalkBack.</p>' +
+
+      '<section class="a11y-toolbar__section" id="a11y-listen" aria-labelledby="a11y-listen-h">' +
+      '<h3 class="a11y-toolbar__section-title" id="a11y-listen-h">Listen</h3>' +
+      '<button type="button" class="btn btn-primary a11y-toolbar__read" id="a11y-read">Read this page aloud</button>' +
+      '<div class="a11y-toolbar__row">' +
+      '<label for="a11y-rate" class="a11y-toolbar__label">Reading speed</label>' +
+      '<select id="a11y-rate" class="a11y-toolbar__select">' +
+      '<option value="0.75">Slow</option><option value="1" selected>Normal</option><option value="1.25">Fast</option><option value="1.5">Faster</option>' +
+      "</select>" +
+      "</div>" +
+      toggleBtn("a11y-hover-speak", "Speak what I point at", "Hover, tap or tab to any text to hear it") +
+      '<p class="a11y-toolbar__note" id="a11y-tts-missing" hidden>Your browser cannot read aloud. Try Chrome, Edge or Safari, or your device\'s built-in screen reader.</p>' +
+      "</section>" +
+
+      '<section class="a11y-toolbar__section" aria-labelledby="a11y-see-h">' +
+      '<h3 class="a11y-toolbar__section-title" id="a11y-see-h">See</h3>' +
       '<div class="a11y-toolbar__group" role="group" aria-labelledby="a11y-font-label">' +
       '<span id="a11y-font-label" class="a11y-toolbar__label">Text size</span>' +
       '<button type="button" id="a11y-font-decrease" aria-label="Decrease text size">A−</button>' +
       '<button type="button" id="a11y-font-reset" aria-label="Reset text size">Reset</button>' +
       '<button type="button" id="a11y-font-increase" aria-label="Increase text size">A+</button>' +
       "</div>" +
-      '<button type="button" id="a11y-contrast" aria-pressed="false">High contrast</button>' +
-      '<button type="button" id="a11y-motion" aria-pressed="false">Reduce motion</button>' +
+      toggleBtn("a11y-contrast", "High contrast", "Black on white, strongest outlines") +
+      toggleBtn("a11y-links", "Highlight links", "Underline and mark everything clickable") +
+      toggleBtn("a11y-cursor", "Big cursor", "A larger pointer that is easier to follow") +
+      "</section>" +
+
+      '<section class="a11y-toolbar__section" aria-labelledby="a11y-read-h">' +
+      '<h3 class="a11y-toolbar__section-title" id="a11y-read-h">Read</h3>' +
+      toggleBtn("a11y-spacing", "Easier reading", "More space between letters, words and lines") +
+      toggleBtn("a11y-guide", "Reading guide", "Dims the page except the line you are on") +
+      "</section>" +
+
+      '<section class="a11y-toolbar__section" aria-labelledby="a11y-move-h">' +
+      '<h3 class="a11y-toolbar__section-title" id="a11y-move-h">Movement</h3>' +
+      toggleBtn("a11y-motion", "Stop animations", "Freeze carousels, scrolling logos and effects") +
+      "</section>" +
+
+      '<button type="button" class="a11y-toolbar__reset" id="a11y-reset-all">Reset all settings</button>' +
       "</div>" +
-      "</aside>"
+      "</aside>" +
+      /* Floating player while the page is being read; lives outside the panel so it stays visible */
+      '<div class="tts-player" id="tts-player" role="region" aria-label="Read aloud controls" hidden>' +
+      '<p class="tts-player__status" id="tts-status" aria-live="polite">Reading</p>' +
+      '<button type="button" class="tts-player__btn" id="tts-prev" aria-label="Previous paragraph">' +
+      '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>' +
+      '<button type="button" class="tts-player__btn tts-player__btn--main" id="tts-pause" aria-label="Pause reading">' +
+      '<svg class="tts-icon-pause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>' +
+      '<svg class="tts-icon-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg></button>' +
+      '<button type="button" class="tts-player__btn" id="tts-next" aria-label="Next paragraph">' +
+      '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>' +
+      '<button type="button" class="tts-player__btn" id="tts-stop" aria-label="Stop reading">' +
+      '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M6 6h12v12H6z"/></svg></button>' +
+      "</div>" +
+      '<div class="reading-guide" id="reading-guide" aria-hidden="true" hidden></div>'
     );
   }
 

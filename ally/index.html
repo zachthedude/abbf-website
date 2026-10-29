@@ -7,6 +7,13 @@
       /* Set the theme before first paint: saved choice, else the OS setting */
       try {
         document.documentElement.setAttribute("data-theme", localStorage.getItem("abbf-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+        /* Accessibility settings too, so text size, contrast and spacing never flash */
+        var p = JSON.parse(localStorage.getItem("abbf-a11y-prefs") || "{}"), h = document.documentElement;
+        if (p.fontSize) h.setAttribute("data-font-size", p.fontSize);
+        if (p.highContrast) h.setAttribute("data-a11y-contrast", "high");
+        if (p.reduceMotion) h.setAttribute("data-a11y-reduce-motion", "true");
+        if (p.spacing) h.setAttribute("data-a11y-spacing", "true");
+        if (p.links) h.setAttribute("data-a11y-links", "true");
       } catch (e) {}
     </script>
     <title>Become an Ally - Adventures Beyond Barriers Foundation</title>
